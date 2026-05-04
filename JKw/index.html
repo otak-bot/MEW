@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penawaran Penting</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            text-align: center;
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            width: 400px;
+            max-width: 90%;
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1;
+        }
+
+        .img-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 2rem;
+            letter-spacing: -0.025em;
+        }
+
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #yesBtn {
+            background-color: #10b981;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+        }
+
+        #yesBtn:hover {
+            background-color: #059669;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
+        }
+
+        #noBtn {
+            background-color: #ef4444;
+            color: white;
+            position: relative;
+            z-index: 999;
+            box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="img-container">
+            <img src="https://k.top4top.io/p_3776e4kil1.jpg" alt="Target Profile">
+        </div>
+        <h1 id="mainTitle">Maukah kamu jadi Jokowi?</h1>
+        
+        <div class="btn-wrapper" id="actions">
+            <button id="yesBtn" onclick="finish()">MAU</button>
+            <button id="noBtn">GAK</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        // Inisialisasi audio dengan link yang kamu berikan
+        const successSound = new Audio('https://i.top4top.io/m_37763n5hi1.mp3');
+
+        function move() {
+            const padding = 60;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding * 2) + padding;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding * 2) + padding;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        noBtn.addEventListener('mouseover', move);
+        noBtn.addEventListener('click', move);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            move();
+        });
+
+        function finish() {
+            // Mainkan suara
+            successSound.play().catch(error => {
+                console.log("Browser memblokir autoplay suara. Klik manual berhasil.");
+            });
+
+            // Update UI
+            document.getElementById('mainTitle').innerText = "Selamat bertugas, Pak!";
+            document.getElementById('actions').innerHTML = "<p style='color: #059669; font-weight: bold; font-size: 1.2rem;'>Keputusan yang sangat visioner! ✅</p>";
+            
+            // Beri sedikit delay agar suara terdengar sebelum alert muncul
+            setTimeout(() => {
+                alert('Silakan ambil sepedanya di depan!');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
